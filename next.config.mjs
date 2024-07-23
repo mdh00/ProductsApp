@@ -13,14 +13,6 @@ const nextConfig = {
         {
           protocol: "https",
           hostname: "i.ibb.co"
-        },
-        {
-          protocol: "https",
-          hostname: "icon-library.com"
-        },
-        {
-          protocol: "http",
-          hostname: "res.cloudinary.com"
         }
       ],
     },
