@@ -1,11 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
-import Swal from 'sweetalert2';
 
-import { fetchProducts } from "@/api/products";
+import { fetchProducts } from "./lib/products"; 
 
 interface Product {
   name: string;
