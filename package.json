@@ -13,6 +13,7 @@
     "@types/react-toastify": "^4.1.0",
     "axios": "^1.6.8",
     "chart.js": "^4.4.2",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "formik": "^2.4.5",
     "html2pdf.js": "^0.10.1",

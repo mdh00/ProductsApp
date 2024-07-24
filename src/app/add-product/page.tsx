@@ -12,7 +12,7 @@ interface FormData {
   imageUrl: string; // Update the type of images to string[]
 }
 
-const AddReview: React.FC = () => {
+const AddProduct: React.FC = () => {
   const router = useRouter(); // Initialize useNavigate
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -34,33 +34,54 @@ const AddReview: React.FC = () => {
 
   
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  // const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
 
     
-    // Send new review data to backend
-    axios
-      .post("http://localhost:8080/review", formData)
-      .then(() => {
-        Swal.fire({
-          icon: "success",
-          title: "Success!",
-          text: "Review added successfully!",
-        }).then(() => {
-          // Redirect to reviews page after successful submission
-          router.push("/review-management/review");
-        });
-      })
-      .catch((error) => {
-        console.error("Error adding review:", error);
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Error adding review. Please try again later.",
-        });
-      });
-  };
+  //   // Send new review data to backend
+  //   axios
+  //     .post("http://localhost:8080/review", formData)
+  //     .then(() => {
+  //       Swal.fire({
+  //         icon: "success",
+  //         title: "Success!",
+  //         text: "Review added successfully!",
+  //       }).then(() => {
+  //         // Redirect to reviews page after successful submission
+  //         router.push("/review-management/review");
+  //       });
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error adding review:", error);
+  //       Swal.fire({
+  //         icon: "error",
+  //         title: "Oops...",
+  //         text: "Error adding review. Please try again later.",
+  //       });
+  //     });
+  // };
 
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post('/api/addProduct', formData);
+      Swal.fire({
+        icon: "success",
+        title: "Success!",
+        text: "Product added successfully!",
+      }).then(() => {
+        router.push("/");
+      });
+    } catch (error) {
+      console.error("Error adding product:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Error adding product. Please try again later.",
+      });
+    }
+  };
 
   return (
     <div className="p-4">
@@ -130,4 +151,4 @@ const AddReview: React.FC = () => {
   );
 };
 
-export default AddReview;
+export default AddProduct;
