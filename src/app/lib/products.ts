@@ -1,3 +1,4 @@
+//lib/products.ts
 import axios from 'axios';
 
 export const fetchProducts = async () => {

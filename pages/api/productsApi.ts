@@ -1,3 +1,4 @@
+//api/productsApi.ts
 import { NextApiRequest, NextApiResponse } from 'next';
 import clientPromise from '@/app/lib/mongodb';
 
