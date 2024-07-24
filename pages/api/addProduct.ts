@@ -14,10 +14,17 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(400).json({ error: 'All fields are required' });
       }
 
+      // Convert price to a number
+      const priceNumber = parseFloat(price);
+
+      if (isNaN(priceNumber)) {
+        return res.status(400).json({ error: 'Invalid price' });
+      }
+
       const result = await collection.insertOne({
         name,
         description,
-        price,
+        price: priceNumber,
         imageUrl,
       });
 
