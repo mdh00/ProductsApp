@@ -2,9 +2,10 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-import { fetchProducts } from "./lib/products"; 
+import { fetchProducts } from "../lib/products";
 
 interface Product {
+  _id: string;
   name: string;
   description: string;
   price: number;
@@ -16,7 +17,6 @@ const Products: React.FC = () => {
   const router = useRouter();
 
   useEffect(() => {
-    // Fetch reviews from backend using fetchReviews function
     fetchProducts()
       .then((products) => {
         setProducts(products);
@@ -27,14 +27,17 @@ const Products: React.FC = () => {
   }, []);
 
   const handleAddProduct = () => {
-    // Redirect to add review page
     router.push("/add-product");
+  };
+
+  const handleProductClick = (id: string) => {
+    router.push(`/products/${id}`);
   };
 
   return (
     <div className="p-4">
-      
-        <div className="p-4 flex justify-between">
+
+      <div className="p-4 flex justify-between">
         <h1 className="text-3xl font-bold">Products</h1>
         <button
           className="px-4 py-2 bg-blue-600 text-white rounded"
@@ -42,13 +45,11 @@ const Products: React.FC = () => {
         >
           Add Product
         </button></div>
-        <div className="p-4 flex justify-between items-center">
+      <div className="p-4 flex justify-between items-center">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {products.length === 0 ? (
-          <p>No products available.</p>
-        ) : (
-          products.map((product, index) => (
-            <div key={index} className="border rounded-lg p-4">
+          {products.map((product, index) => (
+            <div key={index} className="border rounded-lg p-4"
+            onClick={() => handleProductClick(product._id)}>
               {product.imageUrl && (
                 <img
                   src={product.imageUrl}
@@ -57,15 +58,14 @@ const Products: React.FC = () => {
                 />
               )}
               <h2 className="text-2xl font-semibold">{product.name}</h2>
-              <p className="text-gray-700">{product.description}</p>
               <p className="text-xl font-bold mt-2">{product.price.toFixed(2)} LKR</p>
             </div>
           ))
-        )}
+          }
+        </div>
       </div>
-    </div>
 
-      </div>
+    </div>
 
   );
 };

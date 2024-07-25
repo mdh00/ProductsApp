@@ -1,7 +1,14 @@
 //lib/products.ts
-import axios from 'axios';
-
 export const fetchProducts = async () => {
-  const response = await axios.get('/api/productsApi');
-  return response.data;
+  try {
+    const response = await fetch('/api/productsApi');
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Failed to fetch products:', error);
+    throw error;
+  }
 };
