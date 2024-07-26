@@ -1,3 +1,4 @@
+import Image from "next/image";
 interface Product {
   _id: string;
   name: string;
@@ -15,11 +16,13 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
     <div className="flex justify-center items-center min-h-screen">
       <div className="flex items-start p-4 space-x-6 max-w-4xl">
         {product.imageUrl && (
-          <img
-            src={product.imageUrl}
-            alt={product.name}
-            className="w-100 h-auto object-cover rounded-lg border border-gray-200"
-          />
+          <Image
+          src={product.imageUrl}
+          alt={product.name}
+          width={400}
+          height={400}
+          className="object-cover rounded-lg border border-gray-200"
+        />
         )}
         <div className="flex-1">
           <h1 className="text-3xl font-extrabold text-gray-900 mb-2">{product.name}</h1>
