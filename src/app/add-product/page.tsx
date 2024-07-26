@@ -2,25 +2,24 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import Swal from "sweetalert2";
+import Button from "@/components/button";
 
 interface FormData {
   name: string;
   description: string;
   price: number;
-  imageUrl: string; // Update the type of images to string[]
+  imageUrl: string;
 }
 
 const AddProduct: React.FC = () => {
-  const router = useRouter(); // Initialize useNavigate
+  const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
     name: "",
     description: "",
     price: 0,
     imageUrl: "",
   });
- 
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -32,38 +31,7 @@ const AddProduct: React.FC = () => {
     }));
   };
 
-  
-
-  // const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-
-    
-  //   // Send new review data to backend
-  //   axios
-  //     .post("http://localhost:8080/review", formData)
-  //     .then(() => {
-  //       Swal.fire({
-  //         icon: "success",
-  //         title: "Success!",
-  //         text: "Review added successfully!",
-  //       }).then(() => {
-  //         // Redirect to reviews page after successful submission
-  //         router.push("/review-management/review");
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error adding review:", error);
-  //       Swal.fire({
-  //         icon: "error",
-  //         title: "Oops...",
-  //         text: "Error adding review. Please try again later.",
-  //       });
-  //     });
-  // };
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+  const handleAddProduct = async () => {
     try {
       const response = await axios.post('/api/addProduct', formData);
       Swal.fire({
@@ -71,7 +39,7 @@ const AddProduct: React.FC = () => {
         title: "Success!",
         text: "Product added successfully!",
       }).then(() => {
-        router.push("/");
+        router.push("/products");
       });
     } catch (error) {
       console.error("Error adding product:", error);
@@ -87,10 +55,7 @@ const AddProduct: React.FC = () => {
     <div className="p-4">
       <h1 className="text-3xl font-bold mb-4">Add Product</h1>
       <br />
-      <form
-        onSubmit={handleSubmit}
-        className="bg-gray-100 p-6 rounded-lg space-y-4"
-      >
+      <div className="bg-gray-100 p-6 rounded-lg space-y-4">
         <div className="flex flex-col">
           <label htmlFor="name" className="font-semibold">
             Name:
@@ -140,13 +105,8 @@ const AddProduct: React.FC = () => {
           </div>
         
 
-        <button
-          type="submit"
-          className="px-4 py-2 bg-blue-600 text-white rounded"
-        >
-          Submit
-        </button>
-      </form>
+        <Button label="Submit" onClick={handleAddProduct} />
+      </div>
     </div>
   );
 };

@@ -32,7 +32,7 @@ const config: Config = {
       sm: "0.875rem",
       smi: "0.813rem",
       inherit: "inherit",
-      l: "1.5rem",
+      l: "1rem",
       xl: "1.25rem",
       '2xl': "1.5rem",
       '3xl': "1.875rem", 
