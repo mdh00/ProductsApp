@@ -8,7 +8,7 @@ import Button from "@/components/button";
 interface FormData {
   name: string;
   description: string;
-  price: number;
+  price: string;
   imageUrl: string;
 }
 
@@ -17,7 +17,7 @@ const AddProduct: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     name: "",
     description: "",
-    price: 0,
+    price: "",
     imageUrl: "",
   });
 
