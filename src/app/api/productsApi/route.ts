@@ -1,17 +1,16 @@
-//api/productsApi.ts
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextResponse } from 'next/server';
 import clientPromise from '@/app/lib/mongodb';
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export async function GET() {
   try {
     const client = await clientPromise;
     const db = client.db('ProductDB');
 
     const products = await db.collection('product').find({}).toArray();
 
-    res.status(200).json(products);
+    return NextResponse.json(products);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
-};
+}
