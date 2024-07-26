@@ -8,7 +8,7 @@ This project is a [Next.js](https://nextjs.org/) application styled with [Tailwi
 
 ## Deployment
 
-The application is deployed to [Vercel](https://vercel.com/).
+The application is deployed to [Vercel](https://products-app-qrbf.vercel.app/products).
 
 
 
